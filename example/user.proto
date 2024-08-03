@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+package fixbug;
+
+option cc_generic_services = true;
+
+// 定义登录消息类型 name pwd
+message LoginRequest{
+    bytes name = 1;
+    bytes pwd = 2;
+}
+
+// 定义都需要使用的错误信息以及错误代码
+message ResultCode{
+    int32 err = 1;
+    bytes errmsg = 2;
+}
+
+//定义登录的响应消息类型
+message LoginResponse{
+    ResultCode result = 1;
+    bool success = 2;
+}
+
+// 获取好友列表请求
+// message GetFriendListRequest{
+//     uint32 usrid = 1;
+// }
+
+// 获取用户信息
+// message User{
+//     bytes name = 1;
+//     int32 age = 2;
+//     // 枚举类型的设置
+//     enum Sex{
+//         man = 0; // 必须从0开始
+//         woman = 1;
+//     }
+//     Sex sex = 3;
+// }
+
+// 获取好友列表响应
+// message GetFriendListResponse{
+//     // 检查是否获取成功
+//     ResultCode result = 1;
+//     // 获取重复的好友列表
+//     repeated User friend_list = 2;
+// }
+
+// 发布rpc服务
+service UserServiceRpc
+{
+    rpc Login(LoginRequest) returns(LoginResponse);
+    //rpc GetFriendList(GetFriendListRequest) returns(GetFriendListResponse);
+}
